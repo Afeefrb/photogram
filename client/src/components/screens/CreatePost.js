@@ -47,10 +47,12 @@ const CreatePost = () => {
     }, [url])
 
     const postData = () => {
-        if(!title || !body || !image) {
+        if(!title || !body) {
           
-                M.toast({html:"Please enter all fields", classes:"#e57373 red lighten-2"})
+             M.toast({html:"Please enter title and body", classes:"#e57373 red lighten-2"})
          
+        } else if (!image) {
+            M.toast({html:"Please upload a photo", classes:"#e57373 red lighten-2"})
         }
         const data = new FormData();
         data.append("file",image);
@@ -87,7 +89,7 @@ const CreatePost = () => {
 
             <div className="file-field input-field">
                  <div className="btnx blue darken-1">
-                    <span>UPLOAD</span>
+                    <span>UPLOAD PHOTO</span>
                     <input type="file" onChange={(e) => setImage(e.target.files[0])} />
                  </div>
                 <div className="file-path-wrapper">
