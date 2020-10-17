@@ -1,0 +1,273 @@
+html{
+  font-size: large;
+}
+
+h4{
+  font-size: larger;
+}
+
+a{
+  color:black
+}
+
+.poster{
+  padding: 12px;
+}
+
+.home{
+  min-width: 898px;
+}
+
+.loading{
+  margin: auto 400px;
+}
+
+
+
+.home h6:nth-child(4){
+  font-weight: 400;
+  font-size: medium;
+}
+
+.brand-logo, h2 {
+  font-family: "Cookie", cursive;
+  font-size: 55px !important;
+  left: 15%;
+  color: black !important;
+}
+
+nav{
+  position: sticky;
+  top: 0;
+  margin-bottom: 20px;
+  z-index: 100;
+  
+}
+
+.nav-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; 
+  position: fixed;
+ 
+
+}
+
+
+
+.nav-wrapper > #nav-mobile{
+  margin-right: 15%;
+}
+
+@media(max-width:1083px){
+  .brand-logo, h2 {
+    font-family: "Cookie", cursive;
+    font-size: 55px !important;
+    left: 10%;
+    color: black !important;
+    transition: 300ms ease-in;
+  }
+  
+}
+
+@media(max-width:901px){
+  .nav-wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    max-width: max-content;
+  }
+  #nav-mobile{
+    margin-top: 50px;
+  }
+}
+
+
+
+nav ul a{
+  color: black !important;
+}
+
+.myCard{
+ margin-top: 30px;
+}
+
+.auth-card{
+  padding: 20px;
+  text-align: center;
+  margin: 10px auto;
+  max-width: 400px;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.card p {
+  margin-top: 10px;
+  margin-left: 10px;
+
+}
+
+.heading{
+display: flex;
+justify-content: space-between;
+height:60px;
+}
+
+.nameIcon{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.nameIcon h6{
+  position: absolute;
+  left:70px;
+}
+
+
+
+p:nth-child(1){
+  font-weight: 700;
+}
+
+.home-card{
+  max-width: 600px;
+  height: max-content;
+  margin: 26px auto;
+}
+
+.card-content{
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.icons{
+  /* position: relative; */
+  display: flex;
+  width:max-content;
+  margin-left:auto;
+}
+
+.material-icons {
+  margin-right:10px;
+}
+
+.material-icons:hover{
+  cursor: pointer;
+}
+
+.comment{
+  font-size: medium;
+}
+
+span{
+  font-weight: 700;
+  font-size: medium;
+}
+
+.btnx{
+  width: 50%;
+  margin: auto;
+}
+
+.btnx span {
+  font-weight: 700;
+  font-size: large;
+  color: white;
+  
+}
+.imgButton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imgButton .btnx{
+  position: relative;
+  width:max-content + 20px;
+  display: flex;
+  justify-content: center;
+
+  
+}
+
+.imgButton span{
+  font-weight: 500;
+}
+
+
+.input-field input:focus {
+     border-bottom: 1px solid rgb(8 , 93, 252) !important;
+     box-shadow: 0 1px 0 0 rgb(183, 199, 228) !important;
+}
+
+::-webkit-input-placeholder {
+  font-weight: 650;
+}
+
+.btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  font-weight: 700;
+  font-size: large;
+}
+
+
+
+
+
+ .btnx2{
+  margin-top:14px; 
+  color: white !important;
+  background-color: #d32f2f !important;
+  
+
+}
+
+.btnx2:hover{
+ background-color: #b71c1c !important;
+ transition: 200ms;
+  
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* max-width:1200px; */
+  /* padding-left: 160px; */
+
+
+}
+
+.gallery > img {
+  margin: 20px 50px !important;
+
+}
+
+.item{
+  width:22%;
+}
+
+
+
+.home-card{
+  max-width: 600px;
+  /* height: max-content; */
+  margin: 26px auto;
+}
+
+#toast-container{
+  top: 80px !important;
+  right: 20px !important;
+  left: auto !important;
+}
+
