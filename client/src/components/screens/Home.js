@@ -8,26 +8,28 @@ const Home = () => {
  
   const [posts, setPosts] = useState([])
   const [inputEntr,setInputEntr] = useState("");
-  const {state, dispatch} = useContext(UserContext); 
+  const [favButton,setFavButton] = useState(false);
+  const [likeBtn, setlikeBtn] = useState(false);
 
-  useEffect(() => { 
-    
-    fetch("/allposts", {
-      headers:{
-        "Authorization": "Bearer " + localStorage.getItem("jwt") 
-      }
+  const {state, dispatch} = useContext(UserContext);
+  console.log("state: ",state); 
+
+  useEffect(()=>{
+    fetch('/allposts',{
+        headers:{
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+        }
+    }).then(res=>res.json())
+    .then(result=>{
+        console.log(result)
+        setPosts(result.posts)
     })
-    .then(res => res.json())
-    .then(result => {
-      console.log("result.posts: ", result.posts);
-      setPosts(result?.posts?.reverse())
-    })
- 
-  }, [])
+ },[])
 
 
 
   const likePost = (id) => {
+    setlikeBtn(true);
     fetch("/like", {
       method:"PUT",
       headers:{
@@ -52,6 +54,7 @@ const Home = () => {
   }
 
   const unlikePost = (id) => {
+    setlikeBtn(false);
     fetch("/unlike", {
       method:"PUT",
       headers:{
@@ -64,7 +67,7 @@ const Home = () => {
     })
     .then(res => res.json())
     .then(result => {
-      const updatedPosts = posts?.map(post => {
+      const updatedPosts = posts.map(post => {
         if(post._id == result._id) {
           return result
         } else {
@@ -72,6 +75,62 @@ const Home = () => {
         }
       })
       setPosts(updatedPosts)
+    }).catch(err =>console.log(err))
+  }
+
+
+
+  const favPost = (id) => {
+    setFavButton(true);
+    fetch("/fav", {
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer " + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        postId:id
+      })
+    })
+    .then(res => res.json())
+    .then(result => {
+      const updatedPosts = posts.map(post => {
+        if(post._id == result._id) {
+          return result
+        } else {
+          return post
+        }
+      })
+      setPosts(updatedPosts)
+      console.log("post:", result);
+      console.log("LIKED");
+    }).catch(err =>console.log(err))
+  }
+
+
+  const unfavPost = (id) => {
+    setFavButton(false);
+    fetch("/unfav", {
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer " + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        postId:id
+      })
+    })
+    .then(res => res.json())
+    .then(result => {
+      const updatedPosts = posts.map(post => {
+        if(post._id == result._id) {
+          return result
+        } else {
+          return post
+        }
+      })
+      setPosts(updatedPosts)
+      console.log("UNLIKED");
     }).catch(err =>console.log(err))
   }
 
@@ -140,12 +199,14 @@ const deleteComment = (postId, commentId) => {
         })
 } 
 
+console.log("posts:",posts);
+
 
 
   return (
     <div className="home">
 
-      {posts.length==0 && (<img className="loading" src={Loading} />)}
+      {posts?.length==0 && (<img className="loading" src={Loading} />)}
     
       {posts?.map(post => (
         
@@ -169,7 +230,7 @@ const deleteComment = (postId, commentId) => {
 
       </div>
 
-      </div>
+      </div> 
 
    
       
@@ -185,16 +246,31 @@ const deleteComment = (postId, commentId) => {
       
           
           <div className="icons">
-          <i className="material-icons" style={{color:"red"}}>favorite</i>
+          
+
+
+
         {/* like & unlike post*/}
 
+        {post.fav.includes(state?._id)? (
+       <i
+            className="material-icons"
+            onClick={()=>unfavPost(post._id)}
+            style={{color:"red"}}>favorite</i>
+        ):(
+          <i
+            className="material-icons"
+            onClick={()=>favPost(post._id)}
+            style={{color:"red"}}>favorite_border</i>
+        )}
+
         {
-          post.likes.includes(state?._id)
+           post.likes.includes(state?._id)
           ? (
             <i
             className="material-icons"
-            onClick={()=>unlikePost(post._id)}>thumb_down</i>
-          ):(
+            onClick={()=>unlikePost(post._id)}> thumb_down </i>
+        ):(
             <i
             className="material-icons"
             onClick={()=>likePost(post._id)}>thumb_up</i>
@@ -203,6 +279,8 @@ const deleteComment = (postId, commentId) => {
         <p className="likes"> {post.likes.length} </p>
 
           </div>
+
+          
 
         <p>{post.title}</p>
         <p>{post.body}</p>

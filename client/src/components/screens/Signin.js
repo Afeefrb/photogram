@@ -65,6 +65,15 @@ const Signin = () => {
                   onClick={() => PostData()}  > 
                   Login</button>
 
+                  
+
+                <Link to="/reset-password">
+                    <button style={{fontSize:"small", width:"max-content"}} className="btn waves-effect waves-light #1565c0 blue darken-1">
+                         Forgot Password?
+                    </button>
+                </Link>
+                 
+
                 <Link to="/signup">
                 <button className="btn waves-effect waves-light #1565c0 blue darken-1">
                    Don't have an account? Signup 

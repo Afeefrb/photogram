@@ -1,6 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const {MONGO_URI} = require("./config/keys");
+const {MONGO_URI, EMAIL, PASS} = require("./config/dev");
+
+//NODEMAILER
+// const nodemailer = require("nodemailer");
+// const nodemailMailgun = require("nodemailer-mailgun-transport")
+
+require("dotenv").config()
+
 const PORT = process.env.PORT || 5001;
 
 //MODELS
@@ -32,16 +39,17 @@ app.use(authRoutes);
 app.use(postRoutes);
 app.use(userRoutes);
 
+// //NODEMAILER
 
 
 
-// if(process.env.NODE_ENV=="production"){
+if(process.env.NODE_ENV=="production"){
     app.use(express.static('client/build'))
     // const path = require('path')
     // app.get("*",(req,res)=>{
     //     res.sendFile(path.resolve(__dirname,'client','build','index.html'))
     // })
-// }
+}
 
 
 

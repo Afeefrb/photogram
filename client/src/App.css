@@ -22,12 +22,17 @@ a{
   margin: auto 400px;
 }
 
+.no-posts{
+  margin: 200px auto;
+  width: max-content;
+}
 
 
-.home h6:nth-child(4){
+
+/* .home h6:nth-child(4){
   font-weight: 400;
   font-size: medium;
-}
+} */
 
 .brand-logo, h2 {
   font-family: "Cookie", cursive;
@@ -41,6 +46,7 @@ nav{
   top: 0;
   margin-bottom: 20px;
   z-index: 100;
+  background-color: white;
   
 }
 
@@ -57,6 +63,11 @@ nav{
 
 .nav-wrapper > #nav-mobile{
   margin-right: 15%;
+}
+
+.collection{
+  display: flex;
+  flex-direction: column;
 }
 
 @media(max-width:1083px){
@@ -90,6 +101,8 @@ nav ul a{
 
 .myCard{
  margin-top: 30px;
+ min-width: 625px;
+
 }
 
 .auth-card{
@@ -100,6 +113,7 @@ nav ul a{
 }
 
 .card{
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -110,6 +124,11 @@ nav ul a{
   margin-top: 10px;
   margin-left: 10px;
 
+}
+
+.card-image img{
+  /* width:250px; */
+  height: 450px;
 }
 
 .heading{
@@ -159,6 +178,12 @@ p:nth-child(1){
   margin-right:10px;
 }
 
+.search {
+  color:black;
+  font-size: 35px !important;
+  font-weight: 700 !important;
+}
+
 .material-icons:hover{
   cursor: pointer;
 }
@@ -173,7 +198,7 @@ span{
 }
 
 .btnx{
-  width: 50%;
+  width: 70%;
   margin: auto;
 }
 
@@ -271,3 +296,4 @@ span{
   left: auto !important;
 }
 
+ 

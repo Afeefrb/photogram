@@ -7,10 +7,11 @@ const mongoose = require("mongoose");
 const Post = mongoose.model("Post");
 
 //GET: "/allposts"
-router.get("/allposts", (req,res) => {
+router.get('/allposts', requireLogin, (req,res) => {
     Post.find()
         .populate("postedBy", "_id name photo")
         .populate("comments.postedBy", "_id name photo")
+        .sort("-createdAt")
         .then(posts => {
             res.json({posts})
         })
@@ -22,6 +23,7 @@ router.get("/followingFeed", requireLogin, (req,res) => {
     Post.find({postedBy:{$in:req.user.following}})
         .populate("postedBy", "_id name photo")
         .populate("comments.postedBy", "_id name photo")
+        .sort("-createdAt")
         .then(posts => {
             res.json({posts})
         })
@@ -74,10 +76,49 @@ router.put("/like", requireLogin, (req,res) => {
     })
 })
 
+
+
 //PUT: "/unlike"
 router.put('/unlike',requireLogin,(req,res)=>{
     Post.findByIdAndUpdate(req.body.postId,{
         $pull:{likes:req.user._id}
+    },{
+        new:true
+    })
+    .populate("comments.postedBy","_id name photo")
+    .populate("postedBy", "_id name photo")
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    })
+    
+})
+
+//PUT: "/fav"
+router.put("/fav", requireLogin, (req,res) => {
+    Post.findByIdAndUpdate(req.body.postId, {
+        $push:{fav:req.user._id}
+    },{
+        new:true
+    })
+    .populate("comments.postedBy","_id name photo")
+    .populate("postedBy", "_id name photo")
+    .exec((err,result) => {
+        if(err) {
+            return res.status(422).json({error: err})
+        } else {
+            res.json(result)
+        }
+    })
+})
+
+//PUT: "/unfav"
+router.put('/unfav',requireLogin,(req,res)=>{
+    Post.findByIdAndUpdate(req.body.postId,{
+        $pull:{fav:req.user._id}
     },{
         new:true
     })

@@ -22,8 +22,11 @@ const FollowingFeed = () => {
       console.log("result.posts: ", result.posts);
       setPosts(result?.posts?.reverse())
     })
+
+    
  
   }, [])
+
 
 
 
@@ -147,9 +150,10 @@ console.log("posts: ",posts);
   return (
     <div className="home">
 
-    {posts.length==0 && (<img className="loading" src={Loading} />)}
-    
 
+        {posts?.length === 0 && <h5 className="no-posts">You are not following any one.</h5>}
+
+  
       {posts?.map(post => (
         
         <div className="card home-card" key={post._id}>

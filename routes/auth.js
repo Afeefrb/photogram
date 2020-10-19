@@ -3,12 +3,13 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = require("../config/keys");
-const requireLogin = require("../middlewares/requireLogin");
+const crypto = require("crypto");
+
+
 
 //MONGOOSE
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
-
 
 
 //POST: "/signup"
@@ -32,6 +33,7 @@ router.post("/signup", (req,res) => {
                         })
                         user.save()
                             .then(user => {
+                                                             
                                 res.json({message:"User successfully signed up!"})
                             })
                             .catch(err => console.log(err))
@@ -66,6 +68,48 @@ router.post("/signin", (req,res) => {
                 })
                 .catch(err => console.log(err))
         }) //.then(savedUser)***
+})
+
+//POST: '/reset-password'
+router.post("/reset-password", (req,res)=>{
+    crypto.randomBytes(32,(err,buffer) => {
+        if(err) console.log(err);
+        const token = buffer.toString("hex");
+        User.findOne({email:req.body.email})
+            .then(user => {
+                if(!user) {
+                    return res.status(422).json({message:"No user found with that email"})
+                }
+                user.resetToken = token;
+                user.expireToken = Date.now() + 3600000
+                user.save()
+                    .then((result) => {
+                        res.json({message:"Reset Password Link Sent",token:user.resetToken})
+                    })
+            })
+    })
+})
+
+//POST: '/new-password'
+router.post('/new-password',(req,res)=>{
+    const newPassword = req.body.password
+    const sentToken = req.body.token
+    User.findOne({resetToken:sentToken,expireToken:{$gt:Date.now()}})
+    .then(user=>{
+        if(!user){
+            return res.status(422).json({error:"Try again session expired"})
+        }
+        bcrypt.hash(newPassword,12).then(hashedpassword=>{
+           user.password = hashedpassword
+           user.resetToken = undefined
+           user.expireToken = undefined
+           user.save().then((saveduser)=>{
+               res.json({message:"password updated success"})
+           })
+        })
+    }).catch(err=>{
+        console.log(err)
+    })
 })
 
 module.exports = router;

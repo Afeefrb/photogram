@@ -3,6 +3,9 @@ import './App.css';
 
 import {BrowserRouter, Switch, Route, useHistory} from 'react-router-dom';
 
+//ContextAPI
+import {reducer,initialState} from './reducers/useReducer';
+
 //SCREENS & COMPONENTS
 import Navbar from './components/Navbar';
 import Signup from './components/screens/Signup';
@@ -12,9 +15,10 @@ import Home from './components/screens/Home';
 import CreatePost from './components/screens/CreatePost';
 import UserProfile from './components/screens/UserProfile';
 import FollowingFeed from './components/screens/FollowingFeed';
+import Reset from './components/screens/Reset';
+import NewPassword from './components/screens/NewPassword';
 
-//ContextAPI
-import {reducer,initialState} from './reducers/useReducer';
+
 
 export const UserContext = createContext();
 
@@ -31,7 +35,11 @@ const Routing = () => {
     if(user)  {
       dispatch({type:"USER", payload:user})
     }
-    else history.push("/signin")
+    else {
+      if(!history.location.pathname.startsWith("/reset")){
+        history.push("/signin")
+      }
+    }
   },[])
 
   return(
@@ -43,6 +51,9 @@ const Routing = () => {
         <Route path="/profile/:userId" component={UserProfile} />
         <Route path="/create" component={CreatePost} />
         <Route path="/followingFeed" component={FollowingFeed} />
+        <Route path="/reset-password" component={Reset} />
+        <Route path="/new-password/:token" component={NewPassword} />
+
     </Switch>
   )
 }

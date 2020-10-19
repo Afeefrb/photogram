@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
     },
     followers:[{type:ObjectId, ref:"User"}],
     following:[{type:ObjectId, ref:"User"}],
+    resetToken: String,
+    expireToken: Date,
     photo: {
         type:String,
         default:"https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
