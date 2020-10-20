@@ -1,10 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const {MONGO_URI} = require("./config/dev");
-
-//NODEMAILER
-// const nodemailer = require("nodemailer");
-// const nodemailMailgun = require("nodemailer-mailgun-transport")
+// const {MONGO_URI} = require("./config/dev");
 
 require("dotenv").config()
 
