@@ -29,6 +29,9 @@ const Home = () => {
 
 
   const likePost = (id) => {
+    if(!state) {
+      M.toast({html:"Please login to like this post" , classes:"#e57373 red lighten-2"});
+    }
     setlikeBtn(true);
     fetch("/like", {
       method:"PUT",
@@ -81,6 +84,9 @@ const Home = () => {
 
 
   const favPost = (id) => {
+    if(!state) {
+      M.toast({html:"Please login to favourite this post" , classes:"#e57373 red lighten-2"});
+    }
     setFavButton(true);
     fetch("/fav", {
       method:"PUT",

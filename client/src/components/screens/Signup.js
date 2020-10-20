@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import M from 'materialize-css';
 import {UserContext} from '../../App';
+import Loading from '../../images/loading.gif';
 
 
 const Signup = () => { 
@@ -11,6 +12,7 @@ const Signup = () => {
     const [email,setEmail] = useState("");
     const [image, setImage] = useState("");
     const [imageUrl, setImageUrl] = useState(undefined); 
+    const [loading, setLoading] = useState(false)
 
     const history = useHistory();
     const {state,dispatch} = useContext(UserContext)
@@ -62,7 +64,7 @@ const Signup = () => {
             if(data.error){
                 M.toast({html:data.error, classes:"#e57373 red lighten-2"})
             } else {
-                
+                setLoading(false)
                 M.toast({html:data.message, classes:"#4caf50 green"})
                 history.push("/signin")
             } 
@@ -80,7 +82,8 @@ const Signup = () => {
             M.toast({html:"Please enter all fields", classes:"#e57373 red lighten-2"})
      
     }
-
+        
+        setLoading(true)
         if(image) uploadPic();
         else {uploadAllOtherFields()}
     }
@@ -90,6 +93,10 @@ const Signup = () => {
             <div className="card auth-card input-field">
                 <h2>Photogram</h2>
                 <p>Please enter the fields below</p>
+
+                {loading && <img style={{width:"200px",height:"200px"}} src={Loading} />}
+
+          
 
                 <input
                   type="text"

@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const Post = mongoose.model("Post");
 
 //GET: "/allposts"
-router.get('/allposts', requireLogin, (req,res) => {
+router.get('/allposts', (req,res) => {
     Post.find()
         .populate("postedBy", "_id name photo")
         .populate("comments.postedBy", "_id name photo")

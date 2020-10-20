@@ -1,5 +1,4 @@
     import React, {useEffect, useState,useContext} from 'react';
-    import AfeefImg from '../../images/afeef.jpg';
     import Loading from '../../images/loading.gif'
 
     import {UserContext} from '../../App';

@@ -1,6 +1,4 @@
 import React, {useEffect, useState,useContext} from 'react';
-import AfeefImg from '../../images/afeef.jpg';
-
 import {UserContext} from '../../App';
 
 const Profile = () => { 
@@ -71,7 +69,7 @@ const Profile = () => {
 
 
     return (
-        <div style={{minWidth:"645px"}}>
+        <div style={{minWidth:"811px"}}>
             <div style={{
                 display:"flex",
                 justifyContent:"center",

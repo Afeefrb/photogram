@@ -78,7 +78,7 @@ const Navbar = () => {
     return (
         <nav>
             <div className="nav-wrapper white">
-            <Link to={state? "/" : "/signin"} className="brand-logo left">Photogram</Link>
+            <Link to={"/"} className="brand-logo left">Photogram</Link>
             <ul id="nav-mobile" key={state?._id}>
 
                 {renderNavList()}
