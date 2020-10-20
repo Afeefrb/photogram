@@ -141,6 +141,9 @@ const Home = () => {
   }
 
   const comment = (text,postId) => {
+    if(!state) {
+      M.toast({html:"Please login to comment on this post" , classes:"#e57373 red lighten-2"});
+    }
     fetch("/comment", {
       method:"PUT",
       headers:{
