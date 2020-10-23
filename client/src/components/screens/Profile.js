@@ -21,7 +21,7 @@ const Profile = () => {
         .then(result => {
             console.log("result.myPosts: ", result.myposts);
             setMyPosts(result.myposts)
-           
+            
         })
         .catch(err => console.log(err))
     }, [])
@@ -69,16 +69,12 @@ const Profile = () => {
 
 
     return (
-        <div style={{minWidth:"811px"}}>
-            <div style={{
-                display:"flex",
-                justifyContent:"center",
-                
-                
-            }}>
+        <div  className="profile">
+            <div className="profile__container">
                     <div className="imgButton">
 
-                        <img style={{
+                        <img className="profile__img"
+                             style={{
                             width:"150px",
                             height:"150px",
                             borderRadius:"100px"
@@ -100,10 +96,10 @@ const Profile = () => {
 
 
 
-                    <div style={{marginLeft:"30px"}}> 
+                    <div className="profile__details"> 
                     <h4>{state?.name}</h4>
                     <h5>{state?.email}</h5>
-                        <div style={{display:"flex", justifyContent:"space-around", width:"108%"}}>
+                        <div style={{display:"flex", justifyContent:"space-around"}}>
                             <h6>{myPosts.length} posts</h6>
                             <h6>{state?.followers.length} followers</h6>
                             <h6>{state?state.following.length:0} following</h6>

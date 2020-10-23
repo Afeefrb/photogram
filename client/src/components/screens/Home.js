@@ -215,27 +215,32 @@ console.log("posts:",posts);
   return (
     <div className="home">
 
-      {posts?.length==0 && (<img className="loading" src={Loading} />)}
+      {posts?.length==0 && (<img style={{minWidth:"30%"}} className="loading" src={Loading} />)}
     
       {posts?.map(post => (
         
         <div className="card home-card" key={post._id}>
 
       <div className="heading">
-
-        <img src={post.postedBy.photo} style={{width:"10%", borderRadius:"50%"}} />
+      <img className="heading_photo" src={post?.postedBy?.photo}/>
 
         <div className="nameIcon">
+       
 
-        <h6>
-        <Link to={`/profile/${post.postedBy._id}`}>{post.postedBy.name}</Link>
-        </h6>
+        {/* <div className="postedBy_name"> */}
+          
+          <Link to={`/profile/${post.postedBy._id}`}><h6 className="postedBy_name">{post.postedBy.name}</h6></Link>
 
-          {post.postedBy._id == state?._id && ( <i
-            className="material-icons"
+        {/* </div> */}
+
+        {post.postedBy._id == state?._id ?( <i
+            className="material-icons delete"
             style={{cursor:"pointer"}}
-            onClick={()=>deletePost(post._id)}>delete</i>)}
+            onClick={()=>deletePost(post._id)}>delete</i>):null}
 
+       
+
+          
 
       </div>
 

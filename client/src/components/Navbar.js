@@ -9,21 +9,27 @@ const Navbar = () => {
     const [userDetails,setUserDetails] = useState([])
     const history = useHistory();
 
+    const [click, setClick] = useState(false);
+    const handleClick = () => setClick(!click);
 
     const searchModal = useRef(null);
 
     useEffect(() => {   
         M.Modal.init(searchModal.current)
+        setClick(false)
 
     },[])
 
 
     const renderNavList = () => {
 
+     
         if(state){
             return [
-                <div  className="right-links"> 
+                <div  className="right-links" onClick={handleClick}> 
+                    
                     <li key="1"> <i data-target="modal1" className="search large material-icons modal-trigger">search</i> </li>
+                    <br></br>
                     <li key="2"><Link to="/">Home</Link></li>
                     <li key="3"><Link to="/followingFeed">Following Feed</Link></li>
                     <li key="4"><Link to="/profile">My Profile</Link></li>
@@ -39,16 +45,29 @@ const Navbar = () => {
                         </button>
                     </li>
 
+                    <li>
+                            <i 
+                                className="material-icons close"
+                                onClick={handleClick}>
+                                    {click?  "clear": null} 
+                            </i>
+
+                    </li>
+                    
+                    
+
+                   
                 </div>
                     
             ]
     
         } else {
             return [
-                <div>
+                <div className="right-links" onClick={handleClick}>
                    
                      <li key="1"><Link to="/signin">Login</Link></li>
                      <li key="2"><Link to="/signup">Signup</Link></li>
+
                 </div>
       
             ]
@@ -79,7 +98,13 @@ const Navbar = () => {
         <nav>
             <div className="nav-wrapper white">
             <Link to={"/"} className="brand-logo left">Photogram</Link>
-            <ul id="nav-mobile" key={state?._id}>
+            <i 
+                className="material-icons menu"
+                onClick={handleClick}>
+                    {click?  "clear" :"menu"}
+            </i>
+            
+            <ul className={click? "nav-mobile-active":"nav-mobile"} key="#123">
 
                 {renderNavList()}
                 

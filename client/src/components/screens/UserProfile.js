@@ -29,13 +29,6 @@
             })
             .catch(err => console.log(err))
 
-        
-            // setshowFollow((prevState) => {
-            //     if(prevState == true){
-            //         return true
-            //     }
-                
-            // })
 
         }, [])
 
@@ -43,9 +36,9 @@
 
         const followUser = (followId) => {
 
-            if(userProfile?.user.followers.length >= 1) {
-                return setshowFollow(false)
-            }
+            // if(userProfile?.user.followers.includes(state?._id)) {
+            //     return setshowFollow(false)
+            // }
         
 
             fetch("/follow", {
@@ -132,7 +125,7 @@
             :(
     <div>
                 <div style={{
-                    minWidth:"645px",
+                    width:"90%",
                     display:"flex",
                     justifyContent:"center"
                     
@@ -152,7 +145,7 @@
                                 <h6>{userProfile.user.following.length} Following</h6>
                             </div>
 
-                            {showFollow && userProfile.user.followers.length == 0 ? (
+                            {!userProfile?.user.followers.includes(state?._id)  ? (
                                 <button
                                 className="btn waves-effect waves-light #448aff blue accent-2"
                                 onClick={() => followUser(userProfile.user._id)}  > 
