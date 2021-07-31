@@ -1,6 +1,6 @@
 //JWT
 const jwt = require("jsonwebtoken");
-const {JWT_SECRET} = require("../config/keys");
+const {JWT_SECRET} = require("../config/keys"); 
 
 //Mongoose
 const mongoose = require("mongoose");

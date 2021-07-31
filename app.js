@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-// const {MONGO_URI} = require("./config/dev");
+
+//Enable below during DEV, disable before deploying to  PROD
+const {MONGO_URI} = require("./config/dev");
 
 require("dotenv").config()
 

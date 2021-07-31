@@ -98,10 +98,10 @@ const Profile = () => {
 
                     <div className="profile__details"> 
                     <h4>{state?.name}</h4>
-                    <h5>{state?.email}</h5>
+                    <h5>{state?.email}</h5>  
                         <div style={{display:"flex", justifyContent:"space-around"}}>
-                            <h6>{myPosts.length} posts</h6>
-                            <h6>{state?.followers.length} followers</h6>
+                            <h6>{myPosts.length} posts</h6> &nbsp;
+                            <h6>{state?.followers.length} followers</h6> &nbsp;
                             <h6>{state?state.following.length:0} following</h6>
                         </div>
                     </div>

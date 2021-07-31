@@ -33,7 +33,7 @@ const Signup = () => {
         method:"POST",
         body:data
     })
-    .then(res => res.json())
+    .then(res => res.json()) 
     .then(data => {
         setImageUrl(data.url)
     })
